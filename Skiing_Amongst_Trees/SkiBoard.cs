@@ -10,23 +10,25 @@ namespace Skiing_Amongst_Trees
 
         public SkiBoard()
         {
-
+            rowCounter = 0;
+            columnCounter = 0;
         }
         public SkiBoard(int rowCounter, int columnCounter)
         {
-            board = new char[rowCounter, columnCounter];
+            board = new char[rowCounter + 1, columnCounter + 1];
         }
 
         public SkiBoard createSkiBoard(string filePath, SkiBoard skiBoard)
+        //This method takes in a filePath and a skiBoard instance and returns a SkiBoard after creating the rows and columns using the file.
         {
             string line;
             System.IO.StreamReader file = new System.IO.StreamReader(filePath);
-            skiBoard.columnCounter = 0;
             skiBoard.rowCounter = 0;
+            skiBoard.columnCounter = 0;
 
             while ((line = file.ReadLine()) != null)
             {
-                if (rowCounter == 0)
+                if (skiBoard.rowCounter == 0)
                 {
                     foreach (var character in line.ToCharArray())
                     {
@@ -35,24 +37,28 @@ namespace Skiing_Amongst_Trees
                 }
                 skiBoard.rowCounter++;
             }
+            file.Close();
 
+            int columnCounterValueSaved = columnCounter; //This is needed so that columnCounter is not zero after running all this.
             skiBoard = new SkiBoard(rowCounter, columnCounter);
 
-            skiBoard.columnCounter = 0;
+            System.IO.StreamReader fileReadAgain = new System.IO.StreamReader(filePath); //We have to read through the file again so that line is no longer null.
             skiBoard.rowCounter = 0;
+            skiBoard.columnCounter = 0;
 
-            while ((line = file.ReadLine()) != null)
+            while ((line = fileReadAgain.ReadLine()) != null)
             {
                 foreach (var character in line.ToCharArray())
                 {
-                    skiBoard.board[rowCounter, columnCounter] = character;
+                    skiBoard.board[skiBoard.rowCounter, skiBoard.columnCounter] = character;
                     skiBoard.columnCounter++;
                 }
+                skiBoard.columnCounter = 0;
                 skiBoard.rowCounter++;
             }
 
-            file.Close();
-
+            skiBoard.columnCounter = columnCounterValueSaved; //Here we set columnCounter to the value we saved earlier.
+            fileReadAgain.Close();
             return skiBoard;
         }
     }

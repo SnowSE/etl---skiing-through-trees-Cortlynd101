@@ -6,7 +6,7 @@ Scenario: Figure Out Rows, and Columns
 	Given the file TreeMap.txt
 	When reading the board
 	Then the columns should be 31
-	Then the rows should be 322
+	Then the rows should be 323
 	
 
 Scenario: Loop Tree Map
