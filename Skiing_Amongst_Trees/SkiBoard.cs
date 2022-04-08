@@ -8,7 +8,6 @@ namespace Skiing_Amongst_Trees
         public int columnCounter;
         public int rowCounter;
         public (int, int) currentPosition = (0,0);
-
         public SkiBoard()
         {
             rowCounter = 0;
@@ -64,9 +63,9 @@ namespace Skiing_Amongst_Trees
         }
 
         public void updatePosition(int slopeColumn, int slopeRow)
+        //This method updates the position of the skiier based on the slope currently being used.
         {
             var futurePosition = currentPosition.Item2 + slopeColumn;
-            //Console.WriteLine(futurePosition.ToString());
             
             if(futurePosition <= columnCounter)
             {
@@ -76,13 +75,13 @@ namespace Skiing_Amongst_Trees
             else
             {
                 futurePosition = futurePosition - columnCounter - 1;
-                //Console.WriteLine(futurePosition.ToString());
                 currentPosition.Item1 += slopeRow;
                 currentPosition.Item2 = futurePosition;
             }
         }
 
         public (int,int) traverseMountain(int slopeColumn, int slopeRow)
+        //This method continiously traverses the mountain, having the skiier go from the top row to the bottom row.
         {
             var rowImOn = 0;
             while(rowImOn < rowCounter)

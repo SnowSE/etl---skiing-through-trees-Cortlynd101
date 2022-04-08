@@ -7,7 +7,6 @@ Scenario: Figure Out Rows, and Columns
 	When reading the board
 	Then the columns should be 31
 	Then the rows should be 323
-	
 
 Scenario: Loop Tree Map Slope 1
 	Given the file TreeMap.txt
@@ -40,15 +39,11 @@ Scenario: Ski One Row
 	When position is updated
 	Then the new position should be (1,1)
 
-
-
 Scenario: Traverse Mountain
 	Given the file TreeMap.txt
 	When reading the board
 	When you traverse the mountain with slope (1,1)
 	Then the final position should be (3,323)
-
-Scenario: Use Correct Slope
 
 Scenario: Non-Hit if '.'
 

@@ -6,7 +6,6 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
     public sealed class Skiining_Amongst_Trees_Steps
     {
         private readonly ScenarioContext context;
-        public static char[,] skiBoard = new char[3, 3];
         public Skiining_Amongst_Trees_Steps(ScenarioContext context)
         {
             this.context = context;
@@ -15,7 +14,7 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
         [Given(@"the file TreeMap\.txt")]
         public void GivenTheFileTreeMap_Txt()
         {
-            string filePath = @"E:\Program Files\Git\SnowSE\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
+            string filePath = @"C:\Users\Cortl\Source\Repos\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
             context.Add("filePath", filePath);
         }
 
@@ -25,7 +24,6 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
             SkiBoard skiBoard = new SkiBoard();
             skiBoard = skiBoard.createSkiBoard(context.Get<string>("filePath"), skiBoard);
             context.Add("skiBoard", skiBoard);
-
         }
 
         [Then(@"the columns should be (.*)")]
@@ -67,7 +65,6 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
             context.Get<SkiBoard>("skiBoard").updatePosition(p0, p1-p1);
         }
 
-
         [Then(@"position in current row starts back at column (.*)")]
         public void ThenPositionInCurrentRowStartsBackAtColumn(int p0)
         {
@@ -80,7 +77,6 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
             context.Get<SkiBoard>("skiBoard").traverseMountain(p0, p1);
         }
 
-
         [Then(@"the final position should be \((.*),(.*)\)")]
         public void ThenTheFinalPositionShouldBe(int p0, int p1)
         {
@@ -90,8 +86,5 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
             context.Get<int>("positionColumn").Should().Be(p0);
             context.Get<int>("positionRow").Should().Be(p1);
         }
-
-
-
     }
 }
