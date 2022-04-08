@@ -7,6 +7,7 @@ namespace Skiing_Amongst_Trees
         public char [,] board;
         public int columnCounter;
         public int rowCounter;
+        public (int, int) currentPosition = (0,0);
 
         public SkiBoard()
         {
@@ -60,6 +61,21 @@ namespace Skiing_Amongst_Trees
             skiBoard.columnCounter = columnCounterValueSaved; //Here we set columnCounter to the value we saved earlier.
             fileReadAgain.Close();
             return skiBoard;
+        }
+
+        public void updatePosition(int slopeRow, int slopeColumn)
+        {
+            currentPosition.Item1 += slopeRow;
+            currentPosition.Item2 += slopeColumn;
+        }
+
+        public void ifToEndOfColumn()
+        {
+            if(currentPosition.Item2 == 32)
+            {
+                currentPosition.Item2 = 0;
+            }
+
         }
     }
 }

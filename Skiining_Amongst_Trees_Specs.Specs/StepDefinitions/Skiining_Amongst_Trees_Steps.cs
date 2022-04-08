@@ -35,10 +35,46 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
         }
 
         [Then(@"the rows should be (.*)")]
-        public void ThenTheRowsShouldBe(int p0)
+        public void ThenTheRowsShouldBe(int p0) 
         {
             context.Get<SkiBoard>("skiBoard").rowCounter.Should().Be(p0);
         }
+
+
+
+        [Given(@"the slope \((.*),(.*))\")]
+        public void GivenTheSlope(int p0, int p1)
+        {
+            context.Get<SkiBoard>("skiBorad").updatePosition(p0, p1);
+        }
+
+        [When(@"position is updated")]
+        public void WhenPositionIsUpdated()
+        {
+            var position = context.Get<SkiBoard>("skiBoard").currentPosition;
+            context.Add("positionRow", position.Item1);
+            context.Add("positionColumn", position.Item2);
+        }
+
+        [Then(@"the new position should be \((.*),(.*))\")]
+        public void ThenTheNewPositionShouldBe(int p0, int p1)
+        {
+            context.Get<SkiBoard>("positionRow").Should().Be(p0);
+            context.Get<SkiBoard>("positionColumn").Should().Be(p1);
+        }
+
+        [Given(@"current column is equal to (.*)")]
+        public void GivenCurrentColumnIsEqualTo(int p0)
+        {
+            throw new PendingStepException();
+        }
+
+        [Then(@"position in current row starts back at column (.*)")]
+        public void ThenPositionInCurrentRowStartsBackAtColumn(int p0)
+        {
+            throw new PendingStepException();
+        }
+
 
 
     }
