@@ -46,7 +46,24 @@ Scenario: Traverse Mountain
 	Then the final position should be (3,323)
 
 Scenario: Non-Hit if '.'
+	Given the file TreeMap.txt
+	When reading the board
+	Given the slope (1,1)
+	When position is updated
+	Then the new position should be (1,1)
+	Then we do not hit a tree in that position
 
 Scenario: Hit if '#'
+	Given the file TreeMap.txt
+	When reading the board
+	Given the slope (1,1)
+	When position is updated
+	Then the new position should be (1,1)
+	Then we do hit a tree in that position
 
 Scenario: Correct Amount of Hits
+	Given the file TreeMap.txt
+	When reading the board
+	When you traverse the mountain with slope (3,1)
+	Then the final position should be (3,323)
+	Then the amount of trees hit should be 164

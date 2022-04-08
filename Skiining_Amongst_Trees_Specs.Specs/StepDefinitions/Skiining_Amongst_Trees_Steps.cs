@@ -62,7 +62,7 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
         [Given(@"current column is equal to (.*) and current row is (.*)")]
         public void GivenCurrentColumnIsEqualToAndCurrentRowIs(int p0, int p1)
         {
-            context.Get<SkiBoard>("skiBoard").updatePosition(p0, p1-p1);
+            context.Get<SkiBoard>("skiBoard").updatePosition(p0, p1);
         }
 
         [Then(@"position in current row starts back at column (.*)")]
@@ -86,5 +86,24 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
             context.Get<int>("positionColumn").Should().Be(p0);
             context.Get<int>("positionRow").Should().Be(p1);
         }
+
+        [Then(@"we do not hit a tree in that position")]
+        public void ThenWeDoNotHitATreeInThatPosition()
+        {
+            context.Get<SkiBoard>("skiBoard").treeHitAmount.Should().Be(0);
+        }
+
+        [Then(@"we do hit a tree in that position")]
+        public void ThenWeDoHitATreeInThatPosition()
+        {
+            context.Get<SkiBoard>("skiBoard").treeHitAmount.Should().Be(1);
+        }
+
+        [Then(@"the amount of trees hit should be (.*)")]
+        public void ThenTheAmountOfTreesHitShouldBe(int p0)
+        {
+            context.Get<SkiBoard>("skiBoard").treeHitAmount.Should().Be(p0);
+        }
+
     }
 }

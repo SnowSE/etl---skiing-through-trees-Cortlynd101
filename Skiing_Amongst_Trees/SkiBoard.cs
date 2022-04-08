@@ -8,12 +8,13 @@ namespace Skiing_Amongst_Trees
         public int columnCounter;
         public int rowCounter;
         public (int, int) currentPosition = (0,0);
+        public int treeHitAmount;
         public SkiBoard()
         {
             rowCounter = 0;
             columnCounter = 0;
         }
-        public SkiBoard(int rowCounter, int columnCounter)
+        private SkiBoard(int rowCounter, int columnCounter)
         {
             board = new char[rowCounter + 1, columnCounter + 1];
         }
@@ -22,22 +23,7 @@ namespace Skiing_Amongst_Trees
         //This method takes in a filePath and a skiBoard instance and returns a SkiBoard after creating the rows and columns using the file.
         {
             string line;
-            System.IO.StreamReader file = new System.IO.StreamReader(filePath);
-            skiBoard.rowCounter = 0;
-            skiBoard.columnCounter = 0;
-
-            while ((line = file.ReadLine()) != null)
-            {
-                if (skiBoard.rowCounter == 0)
-                {
-                    foreach (var character in line.ToCharArray())
-                    {
-                        skiBoard.columnCounter++;
-                    }
-                }
-                skiBoard.rowCounter++;
-            }
-            file.Close();
+            skiBoard = skiBoard.getRowsAndColumns(filePath, skiBoard);
 
             int columnCounterValueSaved = columnCounter; //This is needed so that columnCounter is not zero after running all this.
             skiBoard = new SkiBoard(rowCounter, columnCounter);
@@ -62,6 +48,28 @@ namespace Skiing_Amongst_Trees
             return skiBoard;
         }
 
+        private SkiBoard getRowsAndColumns (string filePath, SkiBoard skiBoard)
+        //This method sets rowCounter and columnCounter for a SkiBoard object.
+        {
+            string line;
+            System.IO.StreamReader file = new System.IO.StreamReader(filePath);
+            skiBoard.rowCounter = 0;
+            skiBoard.columnCounter = 0;
+
+            while ((line = file.ReadLine()) != null)
+            {
+                if (skiBoard.rowCounter == 0)
+                {
+                    foreach (var character in line.ToCharArray())
+                    {
+                        skiBoard.columnCounter++;
+                    }
+                }
+                skiBoard.rowCounter++;
+            }
+            file.Close();
+            return skiBoard;
+        }
         public void updatePosition(int slopeColumn, int slopeRow)
         //This method updates the position of the skiier based on the slope currently being used.
         {
@@ -86,11 +94,19 @@ namespace Skiing_Amongst_Trees
             var rowImOn = 0;
             while(rowImOn < rowCounter)
             {
+                checkForTreeHit(currentPosition);
                 updatePosition(slopeColumn, slopeRow);
                 rowImOn++;
             }
-            Console.WriteLine("End position is {0}", currentPosition);
             return currentPosition;
+        }
+
+        private void checkForTreeHit((int, int) currentPosition)
+        {
+            if(board[currentPosition.Item1, currentPosition.Item2] == '#')
+            {
+                treeHitAmount++;
+            }
         }
     }
 }
