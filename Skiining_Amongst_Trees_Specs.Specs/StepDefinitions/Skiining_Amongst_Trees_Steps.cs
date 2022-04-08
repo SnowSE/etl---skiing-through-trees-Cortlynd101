@@ -15,7 +15,7 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
         [Given(@"the file TreeMap\.txt")]
         public void GivenTheFileTreeMap_Txt()
         {
-            string filePath = @"C:\Users\brebr\source\repos\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
+            string filePath = @"E:\Program Files\Git\SnowSE\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
             context.Add("filePath", filePath);
         }
 
@@ -40,8 +40,6 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
             context.Get<SkiBoard>("skiBoard").rowCounter.Should().Be(p0);
         }
 
-
-
         [Given(@"the slope \((.*),(.*)\)")]
         public void GivenTheSlope(int p0, int p1)
         {
@@ -63,16 +61,34 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
             context.Get<int>("positionColumn").Should().Be(p1);
         }
 
-        [Given(@"current column is equal to (.*)")]
-        public void GivenCurrentColumnIsEqualTo(int p0)
+        [Given(@"current column is equal to (.*) and current row is (.*)")]
+        public void GivenCurrentColumnIsEqualToAndCurrentRowIs(int p0, int p1)
         {
-            context.Get<SkiBoard>("skiBoard").ifToEndOfColumn();
+            context.Get<SkiBoard>("skiBoard").updatePosition(p0, p1-p1);
         }
+
 
         [Then(@"position in current row starts back at column (.*)")]
         public void ThenPositionInCurrentRowStartsBackAtColumn(int p0)
         {
-            throw new PendingStepException();
+            context.Get<int>("positionColumn").Should().Be(p0);
+        }
+
+        [When(@"you traverse the mountain with slope \((.*),(.*)\)")]
+        public void WhenYouTraverseTheMountainWithSlope(int p0, int p1)
+        {
+            context.Get<SkiBoard>("skiBoard").traverseMountain(p0, p1);
+        }
+
+
+        [Then(@"the final position should be \((.*),(.*)\)")]
+        public void ThenTheFinalPositionShouldBe(int p0, int p1)
+        {
+            var position = context.Get<SkiBoard>("skiBoard").currentPosition;
+            context.Add("positionRow", position.Item1);
+            context.Add("positionColumn", position.Item2);
+            context.Get<int>("positionColumn").Should().Be(p0);
+            context.Get<int>("positionRow").Should().Be(p1);
         }
 
 
