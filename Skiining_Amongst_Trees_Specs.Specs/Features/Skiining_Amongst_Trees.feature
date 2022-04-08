@@ -10,8 +10,15 @@ Scenario: Figure Out Rows, and Columns
 	
 
 Scenario: Loop Tree Map
+	Given current column is equal to 32
+	When position is updated
+	Then position in current row starts back at column 0
 
 Scenario: Ski to Bottom
+	Given the slope (1,1)
+	When position is updated
+	Then the new position should be (1,1)
+
 
 Scenario: Use Correct Slope
 
