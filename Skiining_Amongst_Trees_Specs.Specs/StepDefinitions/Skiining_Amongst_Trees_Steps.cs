@@ -15,7 +15,7 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
         [Given(@"the file TreeMap\.txt")]
         public void GivenTheFileTreeMap_Txt()
         {
-            string filePath = @"C:\Users\Cortl\Source\Repos\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
+            string filePath = @"C:\Users\brebr\source\repos\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
             context.Add("filePath", filePath);
         }
 
@@ -42,10 +42,10 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
 
 
 
-        [Given(@"the slope \((.*),(.*))\")]
+        [Given(@"the slope \((.*),(.*)\)")]
         public void GivenTheSlope(int p0, int p1)
         {
-            context.Get<SkiBoard>("skiBorad").updatePosition(p0, p1);
+            context.Get<SkiBoard>("skiBoard").updatePosition(p0, p1);
         }
 
         [When(@"position is updated")]
@@ -56,17 +56,17 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
             context.Add("positionColumn", position.Item2);
         }
 
-        [Then(@"the new position should be \((.*),(.*))\")]
+        [Then(@"the new position should be \((.*),(.*)\)")]
         public void ThenTheNewPositionShouldBe(int p0, int p1)
         {
-            context.Get<SkiBoard>("positionRow").Should().Be(p0);
-            context.Get<SkiBoard>("positionColumn").Should().Be(p1);
+            context.Get<int>("positionRow").Should().Be(p0);
+            context.Get<int>("positionColumn").Should().Be(p1);
         }
 
         [Given(@"current column is equal to (.*)")]
         public void GivenCurrentColumnIsEqualTo(int p0)
         {
-            throw new PendingStepException();
+            context.Get<SkiBoard>("skiBoard").ifToEndOfColumn();
         }
 
         [Then(@"position in current row starts back at column (.*)")]

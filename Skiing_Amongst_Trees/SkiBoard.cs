@@ -71,7 +71,7 @@ namespace Skiing_Amongst_Trees
 
         public void ifToEndOfColumn()
         {
-            if(currentPosition.Item2 == 32)
+            if(currentPosition.Item2 >= columnCounter)
             {
                 currentPosition.Item2 = 0;
             }
