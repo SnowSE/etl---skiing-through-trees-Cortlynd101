@@ -21,6 +21,7 @@ namespace Skiing_Amongst_Trees
                 Console.WriteLine("\n" + lineToBePrinted);
             }
 
+            skiBoard.traverseMountain(1, 1);
            
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();

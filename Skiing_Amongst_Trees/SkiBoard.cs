@@ -90,6 +90,7 @@ namespace Skiing_Amongst_Trees
                 updatePosition(slopeColumn, slopeRow);
                 rowImOn++;
             }
+            Console.WriteLine("End position is {0}", currentPosition);
             return currentPosition;
         }
     }
