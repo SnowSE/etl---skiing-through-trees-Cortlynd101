@@ -63,19 +63,35 @@ namespace Skiing_Amongst_Trees
             return skiBoard;
         }
 
-        public void updatePosition(int slopeRow, int slopeColumn)
+        public void updatePosition(int slopeColumn, int slopeRow)
         {
-            currentPosition.Item1 += slopeRow;
-            currentPosition.Item2 += slopeColumn;
+            var futurePosition = currentPosition.Item2 + slopeColumn;
+            //Console.WriteLine(futurePosition.ToString());
+            
+            if(futurePosition <= columnCounter)
+            {
+                currentPosition.Item1 += slopeRow;
+                currentPosition.Item2 += slopeColumn;
+            }
+            else
+            {
+                futurePosition = futurePosition - columnCounter - 1;
+                //Console.WriteLine(futurePosition.ToString());
+                currentPosition.Item1 += slopeRow;
+                currentPosition.Item2 = futurePosition;
+            }
         }
 
-        public void ifToEndOfColumn()
+        public (int,int) traverseMountain(int slopeColumn, int slopeRow)
         {
-            if(currentPosition.Item2 >= columnCounter)
+            var rowImOn = 0;
+            while(rowImOn < rowCounter)
             {
-                currentPosition.Item2 = 0;
+                updatePosition(slopeColumn, slopeRow);
+                rowImOn++;
             }
-
+            Console.WriteLine("End position is {0}", currentPosition);
+            return currentPosition;
         }
     }
 }

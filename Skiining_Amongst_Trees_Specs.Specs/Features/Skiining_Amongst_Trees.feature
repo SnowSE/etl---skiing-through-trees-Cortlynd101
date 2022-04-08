@@ -9,14 +9,31 @@ Scenario: Figure Out Rows, and Columns
 	Then the rows should be 323
 	
 
-Scenario: Loop Tree Map
+Scenario: Loop Tree Map Slope 1
 	Given the file TreeMap.txt
 	When reading the board
-	Given current column is equal to 32
+	Given current column is equal to 32 and current row is 2
+	Given the slope (1,1)
 	When position is updated
-	Then position in current row starts back at column 0
+	Then position in current row starts back at column 1
 
-Scenario: Ski to Bottom
+Scenario: Loop Tree Map Slope 2
+	Given the file TreeMap.txt
+	When reading the board
+	Given current column is equal to 32 and current row is 1
+	Given the slope (2,1)
+	When position is updated
+	Then position in current row starts back at column 2
+
+Scenario: Loop Tree Map Slope 17
+	Given the file TreeMap.txt
+	When reading the board
+	Given current column is equal to 30 and current row is 1
+	Given the slope (17,1)
+	When position is updated
+	Then position in current row starts back at column 15
+
+Scenario: Ski One Row
 	Given the file TreeMap.txt
 	When reading the board
 	Given the slope (1,1)
@@ -24,8 +41,14 @@ Scenario: Ski to Bottom
 	Then the new position should be (1,1)
 
 
-Scenario: Use Correct Slope
 
+Scenario: Traverse Mountain
+	Given the file TreeMap.txt
+	When reading the board
+	When you traverse the mountain with slope (1,1)
+	Then the final position should be (3,323)
+
+Scenario: Use Correct Slope
 
 Scenario: Non-Hit if '.'
 

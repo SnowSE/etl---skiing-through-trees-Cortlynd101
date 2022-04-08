@@ -6,7 +6,7 @@ namespace Skiing_Amongst_Trees
     {
         static void Main(string[] args)
         {
-            string filePath = @"C:\Users\Cortl\Source\Repos\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
+            string filePath = @"E:\Program Files\Git\SnowSE\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
             SkiBoard skiBoard = new SkiBoard();
             skiBoard = skiBoard.createSkiBoard(filePath, skiBoard);
 
@@ -21,6 +21,7 @@ namespace Skiing_Amongst_Trees
                 Console.WriteLine("\n" + lineToBePrinted);
             }
 
+            skiBoard.traverseMountain(1, 1);
            
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
