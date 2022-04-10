@@ -16,7 +16,7 @@ namespace Skiing_Amongst_Trees
         }
         private SkiBoard(int rowCounter, int columnCounter)
         {
-            board = new char[rowCounter + 1, columnCounter + 1];
+            board = new char[rowCounter, columnCounter];
         }
 
         public SkiBoard createSkiBoard(string filePath, SkiBoard skiBoard)
@@ -75,14 +75,14 @@ namespace Skiing_Amongst_Trees
         {
             var futurePosition = currentPosition.Item2 + slopeColumn;
             
-            if(futurePosition <= columnCounter)
+            if(futurePosition <= columnCounter-1)
             {
                 currentPosition.Item1 += slopeRow;
                 currentPosition.Item2 += slopeColumn;
             }
             else
             {
-                futurePosition = futurePosition - columnCounter - 1;
+                futurePosition = futurePosition - columnCounter;
                 currentPosition.Item1 += slopeRow;
                 currentPosition.Item2 = futurePosition;
             }
