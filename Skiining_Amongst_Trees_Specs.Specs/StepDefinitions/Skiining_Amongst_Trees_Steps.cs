@@ -14,7 +14,7 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
         [Given(@"the file TreeMap\.txt")]
         public void GivenTheFileTreeMap_Txt()
         {
-            string filePath = @"C:\Users\Cortl\Source\Repos\etl---skiing-through-trees-Cortlynd101\Skiing_Amongst_Trees\TreeMap.txt";
+            string filePath = @"C:\Users\brebr\Source\Repos\etl---skiing-through-trees-Cortlynd10\Skiing_Amongst_Trees\TreeMap.txt";
             context.Add("filePath", filePath);
         }
 
@@ -102,7 +102,7 @@ namespace Skiining_Amongst_Trees_Specs.Specs.StepDefinitions
         [Then(@"the amount of trees hit should be (.*)")]
         public void ThenTheAmountOfTreesHitShouldBe(int p0)
         {
-            context.Get<SkiBoard>("skiBoard").treeHitAmount.Should().Be(0);
+            context.Get<SkiBoard>("skiBoard").treeHitAmount.Should().Be(p0);
         }
 
     }
