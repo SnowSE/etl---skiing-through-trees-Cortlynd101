@@ -70,43 +70,74 @@ namespace Skiing_Amongst_Trees
             file.Close();
             return skiBoard;
         }
-        public void updatePosition(int slopeColumn, int slopeRow)
+        public void updatePosition(int slopeColumn, int slopeRow, SkiBoard skiBoard)
         //This method updates the position of the skiier based on the slope currently being used.
         {
-            var futurePosition = currentPosition.Item2 + slopeColumn;
+            var futurePosition = skiBoard.currentPosition.Item2 + slopeColumn;
             
             if(futurePosition <= columnCounter-1)
             {
-                currentPosition.Item1 += slopeRow;
-                currentPosition.Item2 += slopeColumn;
+                skiBoard.currentPosition.Item1 += slopeRow;
+                skiBoard.currentPosition.Item2 += slopeColumn;
             }
             else
             {
-                futurePosition = futurePosition - columnCounter;
-                currentPosition.Item1 += slopeRow;
-                currentPosition.Item2 = futurePosition;
+                futurePosition = futurePosition - skiBoard.columnCounter;
+                skiBoard.currentPosition.Item1 += slopeRow;
+                skiBoard.currentPosition.Item2 = futurePosition;
             }
         }
 
-        public (int,int) traverseMountain(int slopeColumn, int slopeRow)
+        public (int,int) traverseMountain(int slopeColumn, int slopeRow, SkiBoard skiBoard)
         //This method continiously traverses the mountain, having the skiier go from the top row to the bottom row.
         {
+            skiBoard.currentPosition = (0, 0);
             var rowImOn = 0;
             while(rowImOn < rowCounter)
             {
-                checkForTreeHit(currentPosition);
-                updatePosition(slopeColumn, slopeRow);
+                checkForTreeHit(skiBoard);
+                updatePosition(slopeColumn, slopeRow, skiBoard);
                 rowImOn++;
             }
-            return currentPosition;
+            return skiBoard.currentPosition;
         }
 
-        private void checkForTreeHit((int, int) currentPosition)
+        private void checkForTreeHit(SkiBoard skiBoard)
+        //This method just checks if a tree is hit or not at the current position.
         {
-            if(board[currentPosition.Item1, currentPosition.Item2] == '#')
+            if (skiBoard.currentPosition.Item1 < rowCounter && skiBoard.currentPosition.Item2 < columnCounter)
             {
-                treeHitAmount++;
+                if (board[skiBoard.currentPosition.Item1, skiBoard.currentPosition.Item2] == '#')
+                {
+                    treeHitAmount++;
+                }
             }
+        }
+
+        public (int, int) findBestSlope(SkiBoard skiBoard)
+        //This method returns the slope as a (int, int) after finding the slope that hits the lowest amount of trees.
+        {
+            (int, int) bestSlope = (0, 1);
+            (int, int) testSlope = (0, 1);
+            int lowestTreeAmount = int.MaxValue;
+
+            for (int i = 0; i < columnCounter - 1; i++)
+            {
+                testSlope = (i, 1);
+
+                skiBoard.treeHitAmount = 0; //Reset the treeHitAmount to zero because that is what were testing.
+                traverseMountain(testSlope.Item1, testSlope.Item2, skiBoard);
+                
+
+                if (skiBoard.treeHitAmount < lowestTreeAmount)
+                {
+                    lowestTreeAmount = skiBoard.treeHitAmount;
+                    bestSlope = testSlope;
+                }
+                skiBoard.currentPosition = (0, 0);
+            }
+
+            return bestSlope;
         }
     }
 }

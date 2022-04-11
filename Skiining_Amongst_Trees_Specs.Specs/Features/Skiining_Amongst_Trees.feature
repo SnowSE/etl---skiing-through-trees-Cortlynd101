@@ -45,22 +45,6 @@ Scenario: Traverse Mountain
 	When you traverse the mountain with slope (3,1)
 	Then the final position should be (8,323)
 
-Scenario: Non-Hit if '.'
-	Given the file TreeMap.txt
-	When reading the board
-	Given the slope (2,1)
-	When position is updated
-	Then the new position should be (2,1)
-	Then we do not hit a tree in that position
-
-Scenario: Hit if '#'
-	Given the file TreeMap.txt
-	When reading the board
-	Given the slope (1,1)
-	When position is updated
-	Then the new position should be (1,1)
-	Then we do hit a tree in that position
-
 Scenario: Correct Amount of Hits slope 3
 	Given the file TreeMap.txt
 	When reading the board
@@ -120,3 +104,21 @@ Scenario: Correct Amount of Hits slope 10
 	When reading the board
 	When you traverse the mountain with slope (10,1)
 	Then the amount of trees hit should be 85
+
+Scenario: Correct Amount of Hits slope 15
+	Given the file TreeMap.txt
+	When reading the board
+	When you traverse the mountain with slope (15, 1)
+	Then the amount of trees hit should be 75
+
+Scenario: Correct Amount of Hits slope 22
+	Given the file TreeMap.txt
+	When reading the board
+	When you traverse the mountain with slope (22, 1)
+	Then the amount of trees hit should be 93
+
+Scenario: Finding Best Slope
+	Given the file TreeMap.txt
+	When reading the board
+	When you find the best slope
+	Then the best slope is (15, 1)
